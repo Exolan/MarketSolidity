@@ -101,20 +101,6 @@ contract WebShop{
     function viewComments(uint id_shop, uint id_review) public view returns(Comment[] memory){
         return shops[id_shop].book[id_review].comments;
     }
-    //Функция авторизации
-    function avtorization(address login, bytes32 password) public view returns(bool){
-        require(peoples[msg.sender].login == login, "Not registred!");
-        require(peoples[msg.sender].password == password, "Wrong password!");
-        return true;
-    }
-    //Функция регистрации
-    function registration(string memory name, address login, bytes32 password) public{
-        require(peoples[msg.sender].login != login, "This address is alredy registred!");
-        for(uint i = 0; i < shops.length; i++){
-            require(shops[i].address_shop != login, "This address is alredy registred!");
-        }
-        peoples[msg.sender] = Person(name, login, password, 2, 2);
-    }
 
     //Функции админа
     //Фуункиця смены роли пользователя

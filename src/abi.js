@@ -198,6 +198,11 @@ export const abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
 				"internalType": "address",
 				"name": "login",
 				"type": "address"
@@ -206,21 +211,10 @@ export const abi = [
 				"internalType": "bytes32",
 				"name": "password",
 				"type": "bytes32"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
 			}
 		],
 		"name": "registration",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
