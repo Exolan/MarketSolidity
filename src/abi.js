@@ -489,6 +489,52 @@ export const abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "person",
+				"type": "address"
+			}
+		],
+		"name": "viewPerson",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "login",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "password",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "role",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "activeRole",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct WebShop.Person",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "id_shop",
 				"type": "uint256"
