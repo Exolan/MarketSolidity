@@ -86,6 +86,10 @@ contract WebShop{
 
     }
 
+    function viewPerson(address person) public view returns(Person memory){
+        return peoples[person];
+    }
+
     function viewShops() public view returns(Shop[] memory){
         return shops;
     }
