@@ -1,45 +1,38 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
+import { Routes ,Route } from "react-router-dom"
 import List from "../List"
 import Profile from "../Profile/Profile"
+import Shops from "../Shops"
+import Users from "../Users"
+import RequestsAdmin from '../RequestsAdmin'
 
 function Conteiner({web3, contract}){
-    const dispatch = useDispatch()
     const account = useSelector((state) => state.account)
-    const arrayForAdmin = ['Магазины', 'Пользователи', 'Добавить магазин', 'Заявки пользователей']
+    const arrayForAdmin = ['Магазины', 'Пользователи', 'Заявки']
     const arrayForWorker = []
     const arrayForUser = []
-    let role
-    let activeRole
     let array
 
     if(account.role == 0){
-        role = "Админ"
-    }
-    else if(account.role == 1){
-        role = "Продавец"
-    }
-    else{
-        role = "Покупатель"
-    }
-
-    if(account.activeRole == 0){
-        activeRole = "Админ"
         array = arrayForAdmin
     }
-    else if(account.activeRole == 1){
-        activeRole = "Продавец"
+    else if(account.role == 1){
+        array = arrayForWorker
     }
     else{
-        activeRole = "Покупатель"
+        array = arrayForUser
     }
-
-    dispatch({type: 'SET_ACTIVEROLE', payload: activeRole})
-    dispatch({type: 'SET_ROLES', payload: role})
 
     return(
         <div className="conteiner">
             <Profile web3={web3} contract={contract}/>
             <List array={array}/>
+            <Routes>
+                <Route path={'Магазины'} element={<Shops contract={contract}/>}></Route>
+                <Route path={'Пользователи'} element={<Users contract={contract}/>}></Route>
+                <Route path={'Заявки'} element={<RequestsAdmin contract={contract}/>}></Route>
+                <Route></Route>
+            </Routes>
         </div>
     )
 }

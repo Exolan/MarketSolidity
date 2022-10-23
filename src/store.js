@@ -5,8 +5,8 @@ const defState = {
     addressAccount: '',
     account: {},
     accounts: [],
-    role: '',
-    activeRole: ''
+    role: 0,
+    activeRole: 0
 }
 
 const reducer = (state = defState, action) => {
