@@ -121,13 +121,12 @@ contract WebShop{
     }
 
     //Функции админа
-    //Фуункиця смены роли пользователя
+    //Функиця смены роли пользователя
     function changeUserRole(address person, uint newRole, uint id_shop) public {
         require(peoples[msg.sender].role == 0, "You're not an admin!");
         require(peoples[person].login == person, "This user is not exist!");
         require(peoples[person].role != newRole, "User already has this role!");
         require(newRole <= 2, "This role is not exist!");
-        require(newRole != 0, "You can not change role on admin!");
         if(newRole == 1){
             shops[id_shop].workers.push(person);
         }
@@ -148,7 +147,7 @@ contract WebShop{
     function changeRoleAdmin() public {
         require(peoples[msg.sender].role == 0, "You're not an admin!");
         if(peoples[msg.sender].activeRole == 0){
-            peoples[msg.sender].activeRole = 1;
+            peoples[msg.sender].activeRole = 2;
         }
         else{
             peoples[msg.sender].activeRole = 0;
