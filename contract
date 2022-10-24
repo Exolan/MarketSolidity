@@ -15,6 +15,7 @@ contract WebShop{
     struct Shop{
         uint id_shop;           //ID магазина
         address address_shop;   //Адрес
+        bytes32 password;       //Пароль
         string city;            //Город
         address[] workers;      //Массив с продавцами
         Review[] book;          //Массив отзывов
@@ -111,6 +112,14 @@ contract WebShop{
         require(peoples[msg.sender].password == password, "Wrong password!");
         return true;
     }
+    //Функция авторизации магазина
+    function avtorizationShop(address login, bytes32 password) public view returns(bool){
+        for(uint i = 0; i < shops.length; i++){
+            require(shops[i].address_shop == login, "This address is not registred!");
+            require(shops[i].password == password, "Wrong password!");
+        }
+        return true;
+    }
     //Функция регистрации
     function registration(string memory name, address login, bytes32 password) public{
         require(peoples[msg.sender].login != login, "This address is alredy registred!");
@@ -172,7 +181,7 @@ contract WebShop{
         peoples[person].activeRole = 0;
     }
     //Функция добавления нового магазина
-    function addNewShop(address newShop, string memory city) public {
+    function addNewShop(address newShop, bytes32 password, string memory city) public {
         require(peoples[msg.sender].role == 0, "You're not an admin!");
         for(uint i = 0; i < shops.length; i++){
             require(shops[i].address_shop != newShop, "Address already exist!");
@@ -180,6 +189,7 @@ contract WebShop{
         require(peoples[newShop].login != newShop, "Address already exist!");
         Shop storage newShop1 = shops.push();
         newShop1.address_shop = newShop;
+        newShop1.password = password;
         newShop1.id_shop = shops.length;
         newShop1.city = city;
     }
