@@ -1,8 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
-
-async function ChangeUserRole(user, contract){
-    const dispatch = useDispatch()
-    const addressAccount = useSelector((state)=>state.addressAccount)
+async function ChangeUserRole(user, contract, addressAccount){
     const newRole = prompt("Введите новую роль")
     let idShop
     if(newRole == '1'){

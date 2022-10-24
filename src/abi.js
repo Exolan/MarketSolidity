@@ -43,6 +43,11 @@ export const abi = [
 				"type": "address"
 			},
 			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			},
+			{
 				"internalType": "string",
 				"name": "city",
 				"type": "string"
@@ -315,6 +320,30 @@ export const abi = [
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "login",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			}
+		],
+		"name": "avtorizationShop",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -413,6 +442,11 @@ export const abi = [
 				"internalType": "address",
 				"name": "address_shop",
 				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
 			},
 			{
 				"internalType": "string",
@@ -654,6 +688,11 @@ export const abi = [
 						"internalType": "address",
 						"name": "address_shop",
 						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "password",
+						"type": "bytes32"
 					},
 					{
 						"internalType": "string",

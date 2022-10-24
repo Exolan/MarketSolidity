@@ -52,7 +52,7 @@ function Profile({web3, contract}){
             <h2>Ваш баланс: {useSelector((state) => state.balance)} eth</h2>
             <h3>Ваша роль: {role}</h3>
             <h3>Активная роль: {activeRole}</h3>
-            <button onClick={()=>{setClick(true)}}>Сменить роль</button>
+            {account.role != 2 ? <button onClick={()=>{setClick(true)}}>Сменить роль</button> : null}
         </div>
     )
 }

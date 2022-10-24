@@ -19,11 +19,11 @@ function Users({contract}) {
             setUsers(users)
         }
         ChangeUsers()
-    }, [])
+    }, [users])
 
-    if(users.length == 0){
-        return null
-    }
+    // if(users.length == 0){
+    //     return null
+    // }
 
     return (
         <div>
@@ -36,7 +36,7 @@ function Users({contract}) {
                         <p>Имя: {user.name}</p>
                         <p>Адрес: {user.login}</p>
                         <p>Роль: {user.role}</p>
-                        {user.role != 0 ? <button onClick={()=>{ChangeUserRole(user, contract)}}>Изменить роль</button> : null}
+                        {user.role != 0 ? <button onClick={()=>{ChangeUserRole(user, contract, addressAccount); setUsers([])}}>Изменить роль</button> : null}
                     </div>
                 )
             })}   
