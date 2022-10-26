@@ -14,6 +14,7 @@ function Modals({web3, contract}){
     const [clickAvt, setClickAvt] = useState()
     const [nick, setNick] = useState();
     const addressAccount = useSelector((state) => state.addressAccount)
+    const isShop = useSelector((state) => state.isShop)
     
     useEffect(()=>{
         if(web3){
@@ -24,13 +25,18 @@ function Modals({web3, contract}){
                     const accounts = await web3.eth.getAccounts()
                     dispatch({type: "SET_ACCOUNTS", payload: accounts})
                     setClickAvt(false)
-                    console.log(addressAccount);
-                    await contract.methods.avtorization(addressAccount, await web3.utils.soliditySha3({type: 'string', value: password})).call({from: addressAccount, gas: "99999999"})
+                    if(isShop == false){
+                        await contract.methods.avtorization(addressAccount, await web3.utils.soliditySha3({type: 'string', value: password})).call({from: addressAccount, gas: "99999999"})
+                        const account = await contract.methods.viewPerson(addressAccount).call({from: addressAccount, gas: "99999999"})
+                        dispatch({type: "SET_ACCOUNT", payload: account})
+                    }
+                    else{
+                        await contract.methods.avtorizationShop(addressAccount, await web3.utils.soliditySha3({type: 'string', value: password})).call({from: addressAccount, gas: "99999999"})
+                    }
+                    
                     avt.style.display = "none"
                     const balance = web3.utils.fromWei(await web3.eth.getBalance(addressAccount), "ether")
                     dispatch({type: "SET_BALANCE", payload: balance})
-                    const account = await contract.methods.viewPerson(addressAccount).call({from: addressAccount, gas: "99999999"})
-                    dispatch({type: "SET_ACCOUNT", payload: account})
                     setAvtorization(false)
                     navigate('/profile/')
 
@@ -71,6 +77,10 @@ function Modals({web3, contract}){
             <div className='modal-avtorization'>
                 <input className='input-login' type="text" placeholder='Введите логин' onChange={(e)=>{dispatch({type: "SET_ADDRESSACCOUNT", payload: e.target.value})}}/>
                 <input type="text" placeholder='Введите пароль' onChange={(e)=>{setPassword(e.target.value)}}/>
+                <div>
+                    <p>Магазин</p>
+                    <input type="checkbox" onClick={(e)=>{dispatch({type: 'SET_SHOP', payload: e.target.checked})}}/>
+                </div>
                 <button onClick={()=>{setClickAvt(true)}}>Войти</button>
                 <button onClick={()=>{setRegistration(true)}}>Регистрация</button>
             </div>

@@ -10,19 +10,20 @@ function Conteiner({web3, contract}){
     const account = useSelector((state) => state.account)
     const arrayForAdmin = ['Магазины', 'Пользователи', 'Заявки']
     const arrayForUaW = ['Магазины', 'Роль']
+    const isShop = useSelector((state) => state.isShop)
     let array
 
     if(account.role == 0){
         array = arrayForAdmin
     }
-    else{
+    else if(isShop == false){
         array = arrayForUaW
     }
 
     return(
         <div className="conteiner">
             <Profile web3={web3} contract={contract}/>
-            <List array={array}/>
+            {isShop == false ? <List array={array}/> : null}
             <Routes>
                 <Route path={'Магазины'} element={<Shops web3={web3} contract={contract}/>}></Route>
                 <Route path={'Пользователи'} element={<Users contract={contract}/>}></Route>
