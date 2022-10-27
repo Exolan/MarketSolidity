@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import AddShop from "../AddShop"
 import AddReview from "../AddReview"
+import AddComment from "../AddComment";
 
 function sumRate(shop){
     let i = 0;
@@ -64,12 +65,18 @@ function Shops({web3, contract}){
     const addressAccount = useSelector((state)=>state.addressAccount)
     const account = useSelector((state)=>state.account)
     const [shops, setShops] = useState([])
+    const [click, setClick] = useState(false)
+
     useEffect(()=>{
         async function changeShop(){
             const shops = await contract.methods.viewShops().call()
             setShops(shops)
         }
         changeShop()
+
+        if(click){
+            console.log(1);
+        }
     }, [shops])
 
     return (
@@ -103,21 +110,26 @@ function Shops({web3, contract}){
                                             <p>Оценка: {review.rate}</p>
                                             <div name="" id="">
                                                 <p>Комментарии</p>
-                                                {review.comments.map((comment)=>{
+                                                {review.comments.map((comment, index)=>{
                                                     return(
-                                                        <div value="">
+                                                        <div key={index}>
                                                             <p>Комментатор: {comment.user}</p>
                                                             <p>Комментарий: {comment.comment}</p>
                                                         </div>
                                                     )
                                                 })}
+                                                <button onClick={()=>{AddComment(contract, shop, review, addressAccount); setShops([])}}>Ответить</button>
                                             </div>
-                                            {account.activeRole != 0 ? 
-                                                <div>
-                                                    <button id="0" onСlick={(e)=>{clickOn(shop, contract, e.target.id, addressAccount, review)}}><img src="/like.svg" alt="" /><span>{checkLike(review)}</span></button>
-                                                    <button id="1" onСlick={(e)=>{clickOn(shop, contract, e.target.id, addressAccount, review)}}><img src="/dislike.svg" alt="" /><span>{checkDislike(review)}</span></button>
-                                                </div>
-                                                : null}
+                                            {account.activeRole != 0 ? <div>
+                                                    <button id="0" onСlick={() => {setClick(true)}}>
+                                                        <img src="/like.svg" alt="" />
+                                                        <span>{checkLike(review)}</span>
+                                                    </button>
+                                                    <button id="1" onСlick={() => {setClick(true)}}>
+                                                        <img src="/dislike.svg" alt="" />
+                                                        <span>{checkDislike(review)}</span>
+                                                    </button>
+                                                </div> : null}
                                         </div>
                                     )
                                 })}

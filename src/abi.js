@@ -1,10 +1,5 @@
 export const abi = [
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -156,54 +151,6 @@ export const abi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "login",
-				"type": "address"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "password",
-				"type": "bytes32"
-			}
-		],
-		"name": "avtorization",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "login",
-				"type": "address"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "password",
-				"type": "bytes32"
-			}
-		],
-		"name": "avtorizationShop",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "changeRoleAdmin",
 		"outputs": [],
@@ -251,45 +198,6 @@ export const abi = [
 		"name": "deleteShop",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "peoples",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "login",
-				"type": "address"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "password",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint256",
-				"name": "role",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "activeRole",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -377,6 +285,98 @@ export const abi = [
 		"name": "requestToChangeRole",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "login",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			}
+		],
+		"name": "avtorization",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "login",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			}
+		],
+		"name": "avtorizationShop",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "peoples",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "login",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "role",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "activeRole",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -566,6 +566,51 @@ export const abi = [
 				"internalType": "struct WebShop.Person",
 				"name": "",
 				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "viewRequests",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "requesting",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "haveRole",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newRole",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id_shop",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "admin_answer",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isEnd",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct WebShop.Request[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",

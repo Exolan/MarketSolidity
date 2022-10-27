@@ -5,6 +5,7 @@ import Profile from "../Profile/Profile"
 import Shops from "../Shops"
 import Users from "../Users"
 import RequestsAdmin from '../RequestsAdmin'
+import ChangeRole from "../ChangeRole"
 
 function Conteiner({web3, contract}){
     const account = useSelector((state) => state.account)
@@ -28,7 +29,7 @@ function Conteiner({web3, contract}){
                 <Route path={'Магазины'} element={<Shops web3={web3} contract={contract}/>}></Route>
                 <Route path={'Пользователи'} element={<Users contract={contract}/>}></Route>
                 <Route path={'Заявки'} element={<RequestsAdmin contract={contract}/>}></Route>
-                <Route path={'Роль'}></Route>
+                <Route path={'Роль'} element={<ChangeRole contract={contract}/>}></Route>
                 <Route path={'История'}></Route>
             </Routes>
         </div>

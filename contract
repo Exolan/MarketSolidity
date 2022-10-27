@@ -22,7 +22,6 @@ contract WebShop{
     }
     //Стркутура оценки
     struct Score{
-        uint id_score;
         address user;       //Адрес оценщика
         bool like;          //True - лайк, false - дизлайк
     }
@@ -71,6 +70,7 @@ contract WebShop{
         peoples[0x5c6B0f7Bf3E7ce046039Bd8FABdfD3f9F5021678] = Person("Cristiano Ronaldo", 0x5c6B0f7Bf3E7ce046039Bd8FABdfD3f9F5021678, keccak256(abi.encodePacked("1234")), 2, 2);
         peoples[0x03C6FcED478cBbC9a4FAB34eF9f40767739D1Ff7] = Person("Pasha Tehnick", 0x03C6FcED478cBbC9a4FAB34eF9f40767739D1Ff7, keccak256(abi.encodePacked("1234")), 2, 2);
 
+
         Shop storage newShop1 = shops.push();
         newShop1.address_shop = 0x1aE0EA34a72D944a8C7603FfB3eC30a6669E454C;
         newShop1.id_shop = 0;
@@ -84,6 +84,7 @@ contract WebShop{
         newShop2.city = "Moscow";
         newShop2.workers.push(0x617F2E2fD72FD9D5503197092aC168c91465E7f2);
         newShop2.workers.push(0x17F6AD8Ef982297579C203069C1DbfFE4348c372);
+
     }
 
     function viewPerson(address person) public view returns(Person memory){
@@ -114,13 +115,10 @@ contract WebShop{
     //Функция авторизации магазина
     function avtorizationShop(address login, bytes32 password) public view returns(bool){
         for(uint i = 0; i < shops.length; i++){
-            if(shops[i].address_shop == login){
-                require(shops[i].password == password, "Wrong password!");
-                return true;
-            }
+            require(shops[i].address_shop == login, "This address is not registred!");
+            require(shops[i].password == password, "Wrong password!");
         }
-        return false;
-
+        return true;
     }
     //Функция регистрации
     function registration(string memory name, address login, bytes32 password) public{
@@ -297,7 +295,7 @@ contract WebShop{
         for(uint i = 0; i < shops[id_shop].book[id_review].scores.length; i++){
             require(shops[id_shop].book[id_review].scores[i].user != msg.sender, "You have already scoring!");
         }
-        shops[id_shop].book[id_review].scores.push(Score(shops[id_shop].book[id_review].scores.length, msg.sender, score));
+        shops[id_shop].book[id_review].scores.push(Score(msg.sender, score));
     }
     //Удаление лайка или дизлайка
     function removeScoreReview(uint id_shop, uint id_review, uint id_score) public {
@@ -318,7 +316,7 @@ contract WebShop{
         for(uint i = 0; i < shops[id_shop].book[id_review].comments[id_comment].scores.length; i++){
             require(shops[id_shop].book[id_review].comments[id_comment].scores[i].user != msg.sender, "You have already scoring!");
         }
-        shops[id_shop].book[id_review].comments[id_comment].scores.push(Score(shops[id_shop].book[id_review].scores.length, msg.sender, score));
+        shops[id_shop].book[id_review].comments[id_comment].scores.push(Score(msg.sender, score));
     }
     //Удаление лайка или дизлайка
     function removeScoreReview(uint id_shop, uint id_review, uint id_score, uint id_comment) public {

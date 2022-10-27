@@ -23,7 +23,6 @@ function Profile({web3, contract}){
         else if(account.role == 2){
             role = "Покупатель"
         }
-        console.log(account.activeRole);
         if(account.activeRole == 0){
             activeRole = "Админ"
         }
@@ -38,17 +37,24 @@ function Profile({web3, contract}){
         role = 'Магазин'
         activeRole = "Магазин"
     }
-    console.log(role, activeRole);
     dispatch({type: 'SET_ROLE', payload: role})
     dispatch({type: 'SET_ACTIVEROLE', payload: activeRole})
 
     useEffect(()=>{
         async function changeRole(){
             if(click){
-                await contract.methods.changeRoleAdmin().send({from: addressAccount, gas: '99999999'})
-                const account = await contract.methods.viewPerson(addressAccount).call({from: addressAccount, gas: '99999999'})
-                dispatch({type: 'SET_ACCOUNT', payload: account})
-                dispatch({type: 'SET_ACTIVEROLE', payload: account.activeRole})
+                if(account.role == 1){
+                    await contract.methods.changeRoleWorker().send({from: addressAccount, gas: '99999999'})
+                    const account = await contract.methods.viewPerson(addressAccount).call({from: addressAccount, gas: '99999999'})
+                    dispatch({type: 'SET_ACCOUNT', payload: account})
+                    dispatch({type: 'SET_ACTIVEROLE', payload: account.activeRole})
+                }
+                else{
+                    await contract.methods.changeRoleAdmin().send({from: addressAccount, gas: '99999999'})
+                    const account = await contract.methods.viewPerson(addressAccount).call({from: addressAccount, gas: '99999999'})
+                    dispatch({type: 'SET_ACCOUNT', payload: account})
+                    dispatch({type: 'SET_ACTIVEROLE', payload: account.activeRole})
+                }
             }
             setClick(false)
         }
@@ -61,7 +67,7 @@ function Profile({web3, contract}){
             <h2>Ваш баланс: {useSelector((state) => state.balance)} eth</h2>
             <h3>Ваша роль: {useSelector((state) => state.role)}</h3>
             <h3>Активная роль: {useSelector((state) => state.activeRole)}</h3>
-            {account.role == 0 || account.role == 1 ? <button onClick={()=>{setClick(true)}}>Сменить роль</button> : null}
+            {account.role != 2 ? <button onClick={()=>{setClick(true)}}>Сменить роль</button> : null}
         </div>
     )
 }
