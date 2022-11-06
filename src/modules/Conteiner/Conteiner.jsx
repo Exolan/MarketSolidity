@@ -6,6 +6,7 @@ import Shops from "../Shops"
 import Users from "../Users"
 import RequestsAdmin from '../RequestsAdmin'
 import ChangeRole from "../ChangeRole"
+import './Conteiner.css'
 
 function Conteiner({web3, contract}){
     const account = useSelector((state) => state.account)
@@ -23,7 +24,9 @@ function Conteiner({web3, contract}){
 
     return(
         <div className="conteiner">
-            <Profile web3={web3} contract={contract}/>
+            <div>
+                <Profile web3={web3} contract={contract}/>
+            </div>
             {isShop == false ? <List array={array}/> : null}
             <Routes>
                 <Route path={'Магазины'} element={<Shops web3={web3} contract={contract}/>}></Route>

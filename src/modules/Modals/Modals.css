@@ -1,3 +1,49 @@
+.modals{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    margin-top: 10%;
+}
+
+.modals h1{
+    text-align: center;
+}
+
+.modal-registration, .modal-avtorization{
+    display: grid;
+    justify-content: center;
+    background-color: #EDC7B7;
+    width: max-content;
+    padding: 30px;
+    border-radius: 20px;
+    gap: 20px;
+}
+
+.modal-registration input, .modal-avtorization input{
+    width: 300px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+}
+
+.modal-registration input , .modal-avtorization input{
+    width: 300px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+}
+
+.modal-avtorization div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-avtorization div input{
+    width: 30px;
+    height: 20px;
+}
+
 .modal-registration{
     display: none;
 }

@@ -1,0 +1,27 @@
+.list a.text:active,
+.list a.text:hover,
+.list a.text {
+  text-decoration: none;
+  color: #666;
+}
+
+.list li {
+    list-style-type: none;
+}
+
+.list a:hover{
+    font-size: 20px;
+}
+
+.list nav{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.list{
+    height: 60px;
+    border-radius: 20px;
+    background-color: #BAB2B5;
+}

@@ -3,6 +3,10 @@ import { useSelector } from "react-redux"
 import AddShop from "../AddShop"
 import AddReview from "../AddReview"
 import AddComment from "../AddComment";
+import ButtonsLike from "../ButtonsLike";
+import './Shops.css'
+import ButtonsLikeComment from "../ButtonsLikeComment/ButtonsLikeComment";
+import DeleteShop from "../DeleteShop";
 
 function sumRate(shop){
     let i = 0;
@@ -18,46 +22,6 @@ function sumRate(shop){
             }
         }
         return rating/i
-    }
-}
-
-function checkLike(review){
-    const array = []
-    for(const score of review.scores){
-        if (score.like) {
-            array.push(score)
-        }
-    }
-    return array.length
-}
-
-function checkDislike(review){
-    const array = []
-    for(const score of review.scores){
-        if (!score.like) {
-            array.push(score)
-        }
-    }
-    return array.length
-}
-
-async function clickOn(shop, contract, id, addressAccount, review){
-    console.log(1);
-    for(const score of review.scores){
-        if(score.user == addressAccount){
-            if(id == '0' & score || id == '1' & !score){
-                await contract.methods.removeScoreReview(shop.id_shop, review.id_review, score.id_score)
-            }
-            else{
-                await contract.methods.removeScoreReview(shop.id_shop, review.id_review, score.id_score)
-                if(id == '0'){
-                    await contract.methods.addScoreReview(shop.id_shop, review.id_review, true)
-                }
-                else{
-                    await contract.methods.addScoreReview(shop.id_shop, review.id_review, false)
-                }
-            }
-        }
     }
 }
 
@@ -80,17 +44,17 @@ function Shops({web3, contract}){
     }, [shops])
 
     return (
-        <div>
+        <div className="shops">
             {shops.map((shop, index)=>{
                 return(
-                    <div key={index}>
-                        <p>{shop.id_shop}</p>
-                        <p>{shop.address_shop}</p>
-                        <p>Рейтинг: {sumRate(shop)}</p>
-                        <p>{shop.city}</p>
-                        <div>
+                    <div key={index} className="shop">
+                        <div className="shop-info">
+                            <p>ID: {shop.id_shop}</p>
+                            <p>Адрес: {shop.address_shop}</p>
+                            <p>Рейтинг: {sumRate(shop)}</p>
+                            <p>Город: {shop.city}</p>
                             <p>Продавцы</p>
-                            <div>
+                            <div className="shop-workers">
                                 {shop.workers.map((worker, index)=>{
                                     return(
                                         <div key={index}>
@@ -100,50 +64,42 @@ function Shops({web3, contract}){
                                 })}
                             </div>
                         </div>
-                        <div>
+                        <div className="reviews">
                             <p>Отзывы</p>
                                 {shop.book.map((review, index)=>{
                                     return(
-                                        <div key={index}>
+                                        <div key={index} className="review">
                                             <p>Пользователь: {review.user}</p>
                                             <p>Отзыв: {review.review}</p>
                                             <p>Оценка: {review.rate}</p>
-                                            <div name="" id="">
-                                                <p>Комментарии</p>
+                                            <p>Комментарии</p>
+                                            {review.comments.length != 0 ? <div className="comments">
                                                 {review.comments.map((comment, index)=>{
                                                     return(
-                                                        <div key={index}>
+                                                        <div key={index} className="comment">
                                                             <p>Комментатор: {comment.user}</p>
                                                             <p>Комментарий: {comment.comment}</p>
+                                                            {account.activeRole != 0 ? <ButtonsLikeComment addressAccount = {addressAccount} shop = {shop} review = {review} contract = {contract} comment = {comment}/> : null}
+                                                            <button onClick={()=>{AddComment(contract, shop, review, addressAccount); setShops([])}}>Ответить</button>
                                                         </div>
                                                     )
                                                 })}
-                                                <button onClick={()=>{AddComment(contract, shop, review, addressAccount); setShops([])}}>Ответить</button>
-                                            </div>
-                                            {account.activeRole != 0 ? <div>
-                                                    <button id="0" onСlick={() => {setClick(true)}}>
-                                                        <img src="/like.svg" alt="" />
-                                                        <span>{checkLike(review)}</span>
-                                                    </button>
-                                                    <button id="1" onСlick={() => {setClick(true)}}>
-                                                        <img src="/dislike.svg" alt="" />
-                                                        <span>{checkDislike(review)}</span>
-                                                    </button>
-                                                </div> : null}
+                                            </div> : <button onClick={()=>{AddComment(contract, shop, review, addressAccount); setShops([])}}>Ответить</button>}
+                                            {account.activeRole != 0 ? <ButtonsLike addressAccount = {addressAccount} shop = {shop} review = {review} contract = {contract}/> : null}
                                         </div>
                                     )
                                 })}
-                                {account.activeRole == 2 ? <button onClick={()=>{AddReview(contract, addressAccount, shop); setShops([])}}>Оставить отзыв</button> : null}
+                                {account.activeRole == 2 ? <div className="button-add-review"><button onClick={()=>{AddReview(contract, addressAccount, shop); setShops([])}}>Оставить отзыв</button> </div>: null}
+                                {account.role == 0 ? <div className="button-delete-shop"><button onClick={()=>{DeleteShop(contract, addressAccount, shop); setShops([])}}>Удалить магазин</button></div> : null}
                         </div>
                     </div>
                 )
             })}
             {account.role == 0 ? 
-                <div>
+                <div className="button-add-shop">
                     <button onClick={()=>{AddShop(web3, contract, addressAccount); setShops([])}}>Добавить магазин</button>
                 </div>:
-                null}
-            
+            null}
         </div>
     )
 }

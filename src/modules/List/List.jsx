@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom"
 
+import './List.css'
+
 function List({array}){
     return(
         <div className="list">

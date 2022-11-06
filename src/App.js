@@ -7,7 +7,7 @@ import Modals from './modules/Modals'
 import { Route, Routes } from 'react-router';
 
 function App() {
-  const contractAddress = "0x7a91A3f069f700268287258D60c963C328b39B9b";
+  const contractAddress = "0x8b211511422391AF3950660a59B3909856b3F6B4";
   const [web3, setWeb3] = useState()
   const [contract, setContract] = useState()
   useEffect(()=>{

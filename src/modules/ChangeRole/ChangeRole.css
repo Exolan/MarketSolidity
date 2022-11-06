@@ -1,0 +1,13 @@
+.review-user{
+    display: flex;
+    justify-content: center;
+}
+
+.review-user div{
+    display: grid;
+    justify-content: center;
+    gap: 20px;
+    background-color: #EDC7B7;
+    border-radius: 20px;
+    padding: 40px;
+}

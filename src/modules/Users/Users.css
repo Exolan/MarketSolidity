@@ -1,0 +1,13 @@
+.users{
+    display: grid;
+    justify-content: center;
+}
+
+.user{
+    display: grid;
+    justify-content: left;
+    border-radius: 20px;
+    background-color: #EDC7B7;
+    gap: 10px;
+    padding: 40px;
+}

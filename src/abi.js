@@ -1,5 +1,10 @@
 export const abi = [
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -151,6 +156,54 @@ export const abi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "login",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			}
+		],
+		"name": "avtorization",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "login",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			}
+		],
+		"name": "avtorizationShop",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "changeRoleAdmin",
 		"outputs": [],
@@ -203,146 +256,6 @@ export const abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "login",
-				"type": "address"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "password",
-				"type": "bytes32"
-			}
-		],
-		"name": "registration",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "id_shop",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "id_review",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "id_score",
-				"type": "uint256"
-			}
-		],
-		"name": "removeScoreReview",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "id_shop",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "id_review",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "id_score",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "id_comment",
-				"type": "uint256"
-			}
-		],
-		"name": "removeScoreReview",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "id_shop",
-				"type": "uint256"
-			}
-		],
-		"name": "requestToChangeRole",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "login",
-				"type": "address"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "password",
-				"type": "bytes32"
-			}
-		],
-		"name": "avtorization",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "login",
-				"type": "address"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "password",
-				"type": "bytes32"
-			}
-		],
-		"name": "avtorizationShop",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
@@ -377,6 +290,93 @@ export const abi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "login",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "password",
+				"type": "bytes32"
+			}
+		],
+		"name": "registration",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id_shop",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "id_review",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "id_comment",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "id_score",
+				"type": "uint256"
+			}
+		],
+		"name": "removeScoreComment",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id_shop",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "id_review",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "id_score",
+				"type": "uint256"
+			}
+		],
+		"name": "removeScoreReview",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id_shop",
+				"type": "uint256"
+			}
+		],
+		"name": "requestToChangeRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

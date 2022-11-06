@@ -1,0 +1,93 @@
+.shops{
+    display: grid;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.shop{
+    padding: 40px;
+    border-radius: 20px;
+    background-color: #EDC7B7;
+}
+
+.shop-info{
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+}
+
+.shop-workers{
+    display: grid;
+    padding: 5px;
+    background-color: #BAB2B5;
+    width: 500px;
+    border-radius: 20px;
+    height: 60px;
+    justify-content: center;
+    overflow: auto;
+    overflow-x: hidden;
+    gap: 10px;
+}
+
+.shop-workers p{
+    color: white;
+}
+
+.review{
+    display: grid;
+    padding: 10px;
+    background-color: #BAB2B5;
+    width: 500px;
+    border-radius: 20px;
+    height: 160px;
+    justify-content: center;
+    overflow: auto;
+    overflow-x: hidden;
+    gap: 10px;
+}
+
+.review p{
+    color: white;
+}
+
+.comments{
+    display: grid;
+    padding: 10px;
+    background-color: #EDC7B7;
+    width: 450px;
+    border-radius: 20px;
+    height: 160px;
+    justify-content: center;
+    overflow: auto;
+    overflow-x: hidden;
+    gap: 10px;
+}
+
+.comment{
+    display: grid;
+    background-color: #EEE2DC;
+    justify-content: center;
+    height: max-content;
+    padding: 10px;
+    border-radius: 20px;
+    gap: 10px;
+}
+
+.button-add-shop{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.button-add-review{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button-delete-shop{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}

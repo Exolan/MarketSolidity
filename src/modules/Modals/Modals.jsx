@@ -4,6 +4,13 @@ import { useNavigate } from "react-router";
 
 import "./Modals.css"
 
+function clearInput(div){
+    const inputs = div.querySelectorAll('input')
+    for(const input of inputs){
+        input.value = ''
+    }
+}
+
 function Modals({web3, contract}){
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -29,17 +36,26 @@ function Modals({web3, contract}){
                         await contract.methods.avtorization(addressAccount, await web3.utils.soliditySha3({type: 'string', value: password})).call({from: addressAccount, gas: "99999999"})
                         const account = await contract.methods.viewPerson(addressAccount).call({from: addressAccount, gas: "99999999"})
                         dispatch({type: "SET_ACCOUNT", payload: account})
+                        avt.style.display = "none"
+                        const balance = web3.utils.fromWei(await web3.eth.getBalance(addressAccount), "ether")
+                        dispatch({type: "SET_BALANCE", payload: balance})
+                        setAvtorization(false)
+                        navigate('/profile/')
                     }
                     else{
-                        await contract.methods.avtorizationShop(addressAccount, await web3.utils.soliditySha3({type: 'string', value: password})).call({from: addressAccount, gas: "99999999"})
+                        console.log(isShop);
+                        const enter = await contract.methods.avtorizationShop(addressAccount, await web3.utils.soliditySha3({type: 'string', value: password})).call({from: addressAccount, gas: "99999999"})
+                        if(enter == true){
+                            avt.style.display = "none"
+                            const balance = web3.utils.fromWei(await web3.eth.getBalance(addressAccount), "ether")
+                            dispatch({type: "SET_BALANCE", payload: balance})
+                            setAvtorization(false)
+                            navigate('/profile/')
+                        }
+                        else{
+                            alert('Этого магазина не существует!')
+                        }
                     }
-                    
-                    avt.style.display = "none"
-                    const balance = web3.utils.fromWei(await web3.eth.getBalance(addressAccount), "ether")
-                    dispatch({type: "SET_BALANCE", payload: balance})
-                    setAvtorization(false)
-                    navigate('/profile/')
-
                 }
                 avtorization(avt)
             }
@@ -47,8 +63,9 @@ function Modals({web3, contract}){
                 async function registration(reg, avt){
                     setClickReg(false)
                     await contract.methods.registration(nick, addressAccount, await web3.utils.soliditySha3({type: 'string', value: password})).send({from: addressAccount, gas: "99999999"})
-                    avt.style.display = "flex"
+                    avt.style.display = "grid"
                     reg.style.display = "none"
+                    clearInput(reg)
                     setRegistration(false)
                     setAvtorization(true)
                 }
@@ -57,15 +74,17 @@ function Modals({web3, contract}){
             else if(isRegistration === true){
                 async function drawReg(reg, avt){
                     avt.style.display = "none"
-                    reg.style.display = "flex"
+                    clearInput(avt)
+                    reg.style.display = "grid"
                     setAvtorization(false)
                 }
                 drawReg(reg, avt)
             }
             else if(isAvtorization === true){
                 async function drawAvt(reg, avt){
-                    avt.style.display = "flex"
+                    avt.style.display = "grid"
                     reg.style.display = "none"
+                    clearInput(reg)
                     setRegistration(false)
                 }
                 drawAvt(reg, avt)
@@ -75,6 +94,7 @@ function Modals({web3, contract}){
     return(
         <div className="modals">
             <div className='modal-avtorization'>
+                <h1>Авторизация</h1>
                 <input className='input-login' type="text" placeholder='Введите логин' onChange={(e)=>{dispatch({type: "SET_ADDRESSACCOUNT", payload: e.target.value})}}/>
                 <input type="text" placeholder='Введите пароль' onChange={(e)=>{setPassword(e.target.value)}}/>
                 <div>
@@ -85,6 +105,7 @@ function Modals({web3, contract}){
                 <button onClick={()=>{setRegistration(true)}}>Регистрация</button>
             </div>
             <div className="modal-registration">
+                <h1>Регистрация</h1>
                 <input className="input-nick" placeholder="Введите ник нейм" onChange={(e)=>{setNick(e.target.value)}}/>
                 <input className='input-login' type="text" placeholder='Введите логин' onChange={(e)=>{dispatch({type: "SET_ADDRESSACCOUNT", payload: e.target.value})}}/>
                 <input type="text" placeholder={'Введите пароль'} onChange={(e)=>{setPassword(e.target.value)}}/>

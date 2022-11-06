@@ -1,0 +1,20 @@
+.buttons-like{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.buttons-like button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: #EDC7B7;
+    width: 30px;
+    height: 30px;
+}
+
+.buttons-like img{
+    width: 15px;
+    height: 15px;
+}

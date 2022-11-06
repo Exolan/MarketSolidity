@@ -1,0 +1,20 @@
+.profile{
+    display: grid;
+    margin-top: 30px;
+    padding: 40px;
+    gap: 40px;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: #EDC7B7;
+}
+
+.profile div{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile button{
+    width: 130px;
+}

@@ -1,0 +1,19 @@
+.requests-admin{
+    display: grid;
+    justify-content: center;
+    gap: 20px;
+}
+
+.request-admin{
+    display: grid;
+    justify-content: left;
+    gap: 10px;
+    border-radius: 20px;
+    background-color: #EDC7B7;
+    padding: 40px;
+}
+
+.request-admin div{
+    display: grid;
+    gap: 10px;
+}

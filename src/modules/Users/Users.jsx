@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ChangeUserRole from "../ChangeUserRole";
 
+import './Users.css'
+
 function Users({contract}) {
     const addressAccount = useSelector((state)=>state.addressAccount)
     const accounts = useSelector((state)=>state.accounts)
@@ -21,18 +23,14 @@ function Users({contract}) {
         ChangeUsers()
     }, [users])
 
-    // if(users.length == 0){
-    //     return null
-    // }
-
     return (
-        <div>
+        <div className="users">
             {users.map((user, index)=>{
                 if(user.login == addressAccount){
                     return null
                 }
                 return(
-                    <div key={index}>
+                    <div key={index} className="user">
                         <p>Имя: {user.name}</p>
                         <p>Адрес: {user.login}</p>
                         <p>Роль: {user.role}</p>
